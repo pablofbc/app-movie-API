@@ -31,8 +31,8 @@ namespace MoviesAPI.Controllers
             this.mapper = mapper;
         }
 
-        [AllowAnonymous]
-        [HttpGet, Route("selectListGenres")]//api/genres
+        
+        [HttpGet, Route("selectListGenres")]
         public async Task<ActionResult<List<GenreDTO>>> Get()
         {
             logger.LogInformation("Getting all the genres");
@@ -40,7 +40,7 @@ namespace MoviesAPI.Controllers
             return mapper.Map<List<GenreDTO>>(genres);
         }
 
-        [AllowAnonymous]
+        
         [HttpGet, Route("selectGenre/{id}")]
         public async Task<ActionResult<GenreDTO>> Get(int id)
         {
@@ -52,36 +52,29 @@ namespace MoviesAPI.Controllers
             return mapper.Map<GenreDTO>(genre);
         }
 
-        [AllowAnonymous]
-        [HttpPost, Route("saveGenre")]// GET: GenresController/Details/5
+        
+        [HttpPost, Route("saveGenre")]
         public async Task<ActionResult> Post([FromBody]GenreCreationDTO genreCreationDTO)
         {
-            var genre = mapper.Map<Genre>(genreCreationDTO);
-            //var genre = new Genre
-            //{
-            //    Name = genreCreationDTO.Name
-            //};
-
+            var genre = mapper.Map<Genre>(genreCreationDTO);    
             context.Add(genre);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
-        [AllowAnonymous]
-        [HttpPut, Route("updateGenre/{id}")]
         
+        [HttpPut, Route("updateGenre/{id}")]
         public async Task<ActionResult> Put (int id,[FromBody] GenreCreationDTO genreCreationDTO)
         {
             var genre = mapper.Map<Genre>(genreCreationDTO);
             genre.Id = id;
             context.Entry(genre).State = EntityState.Modified;
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
-        [AllowAnonymous]
+        
         [HttpDelete, Route("deleteGenre/{id}")]
-        //[Route("deleteGenre")]
         public async Task<ActionResult> Delete(int Id)
         {
             var genre = await context.Genres.FirstOrDefaultAsync(x => x.Id == Id);
@@ -91,7 +84,7 @@ namespace MoviesAPI.Controllers
             }
             context.Remove(genre);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
                    
         }
                        

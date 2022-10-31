@@ -47,7 +47,7 @@ namespace MoviesAPI.Controllers
             var movieTheater = mapper.Map<MovieTheater>(movieCreationDTO);
             context.Add(movieTheater);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
 
         }
 
@@ -61,7 +61,7 @@ namespace MoviesAPI.Controllers
             }
             movieTheater = mapper.Map(movieCreationDTO, movieTheater);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete, Route("deleteMovieTheater/{id}")]
@@ -74,7 +74,7 @@ namespace MoviesAPI.Controllers
             }
             context.Remove(movieTheater);
             await context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
     }
 }
