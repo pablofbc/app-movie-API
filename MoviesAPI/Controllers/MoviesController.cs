@@ -27,7 +27,7 @@ namespace MoviesAPI.Controllers
             this.fileStorageService = fileStorageService;
         }
 
-        [HttpGet] //, Route("selectListMovies")]
+        [HttpGet, Route("selectMovies")]
         public async Task<ActionResult<HomeDTO>> Get()
         {
             var top = 6;
@@ -51,7 +51,7 @@ namespace MoviesAPI.Controllers
             return homeDTO;
         }
 
-        [HttpGet("{id:int}")]//, Route("selectMovie/{id}")]
+        [HttpGet, Route("selectMovie/{id}")]//("{id:int}")]
         public async Task<ActionResult<MovieDTO>> Get(int id)
         {
             var movie = await context.Movies
@@ -116,7 +116,7 @@ namespace MoviesAPI.Controllers
             return new MoviePostGetDTO() { Genres = genresDTO, MovieTheaters = movieTheatersDTO };
         }
 
-        [HttpPost]//, Route("saveMovie")]
+        [HttpPost, Route("saveMovie")]
         public async Task<ActionResult<int>> Post([FromForm] MovieCreationDTO movieCreationDTO)
         {
             var movie = mapper.Map<Movie>(movieCreationDTO);
@@ -161,8 +161,8 @@ namespace MoviesAPI.Controllers
             return response;
         }
 
-        [HttpPut("{id:int}")]//, Route("updateMovie/{id}")]
-        public async Task<ActionResult> Put(int id, [FromForm] MovieCreationDTO movieCreationDTO)
+        [HttpPut, Route("updateMovie/{id}")]//("{id:int}")]
+        public async Task<ActionResult> Put (int id, [FromForm] MovieCreationDTO movieCreationDTO)
         {
             var movie = await context.Movies.Include(x => x.MoviesActors)
                 .Include(x => x.MoviesGenres)
@@ -198,7 +198,7 @@ namespace MoviesAPI.Controllers
             }
         }
 
-        [HttpDelete("{id:int}")]//, Route("deleteMovie/{id}")]
+        [HttpDelete, Route("deleteMovie/{id}")] //("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var movie = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);

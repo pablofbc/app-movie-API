@@ -71,8 +71,6 @@ namespace MoviesAPI
                 options.Filters.Add(typeof(MyExceptionFilter));
             });
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MoviesAPI", Version = "v1" });
@@ -96,10 +94,6 @@ namespace MoviesAPI
             app.UseRouting();
 
             app.UseCors();
-
-            //app.UseAuthentication();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

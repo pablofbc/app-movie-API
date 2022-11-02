@@ -53,6 +53,7 @@ namespace MoviesAPI.Helpers
                     {
                         Id = moviesActors.ActorId,
                         Name = moviesActors.Actor.Name,
+                        Surname = moviesActors.Actor.Surname,
                         Character = moviesActors.Character,
                         Picture = moviesActors.Actor.Picture,
                         Order = moviesActors.Order
